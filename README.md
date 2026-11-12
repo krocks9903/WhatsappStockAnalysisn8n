@@ -2,6 +2,13 @@
 
 A comprehensive n8n workflow that provides intelligent stock analysis combining technical indicators, sentiment analysis, and multi-timeframe trading signals.
 
+
+> **Status:** this repo holds one exported n8n workflow (`n8nwhatsapp.json`). Three things to know before importing it:
+>
+> - The trigger is n8n's built-in chat trigger. There is no WhatsApp node in this workflow, despite the repo name.
+> - The `StockTool` node calls a separate n8n workflow for price data and charts. That workflow is not included here, so you need to supply your own and set `YOUR_WORKFLOW_ID`.
+> - Indicators such as MACD, RSI and moving averages are not calculated by code in this repo. The agent's system prompt asks GPT-4o-mini to reason about them from whatever the stock tool and Tavily search return, so treat the output as a language-model summary, not computed signals.
+
 ## Overview
 
 Stock Agent is an automated trading analysis system built on n8n that delivers professional-grade stock analysis reports. The agent processes stock tickers through a structured 6-step framework, combining quantitative metrics, technical analysis across multiple timeframes, and real-time market sentiment to generate actionable trading insights.
@@ -146,8 +153,8 @@ Each analysis includes:
 
 1. **Clone Repository**
    ```bash
-   git clone https://github.com/yourusername/stock-agent.git
-   cd stock-agent
+   git clone https://github.com/krocks9903/WhatsappStockAnalysisn8n.git
+   cd WhatsappStockAnalysisn8n
    ```
 
 2. **Import Workflow**
