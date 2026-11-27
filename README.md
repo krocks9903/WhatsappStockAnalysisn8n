@@ -174,6 +174,7 @@ Each analysis includes:
    - `WEBHOOK_ID_PLACEHOLDER`
    - `UNIQUE_VERSION_ID`
    - `UNIQUE_INSTANCE_ID`
+   - `UNIQUE_WORKFLOW_ID`
 
 5. **Test Configuration**
    - Verify webhook endpoint accessibility
@@ -206,31 +207,11 @@ What's the risk/reward for this trade?
 
 ## API Integration
 
-### Webhook Endpoint
-```
-POST /webhook/your-webhook-id
-Content-Type: application/json
-
-{
-  "message": "Analyze AAPL",
-  "user_id": "optional_user_identifier"
-}
-```
+### Sending Messages
+The workflow starts from n8n's "When chat message received" chat trigger, not a custom webhook with its own request body. In the export the trigger's options are empty and public access is not turned on, so by default you talk to it from the Chat panel in the n8n editor. To reach it from outside n8n, enable public access on that trigger node and use the chat URL n8n shows for it.
 
 ### Response Format
-```json
-{
-  "analysis": {
-    "ticker": "AAPL",
-    "snapshot": "...",
-    "signals": {...},
-    "technicals": {...},
-    "sentiment": {...}
-  },
-  "timestamp": "2025-01-XX",
-  "confidence": "high"
-}
-```
+The reply is the AI Agent's text output: a written report following the sections in its system prompt (Snapshot, Trading Signals, Sentiment & News and so on). It is not a structured JSON object with fields like `ticker` or `signals`, so parse it as text if you call it from code.
 
 ## Configuration Options
 
